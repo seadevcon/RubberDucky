@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private View multipleMatchesScrollBar;
     private ProgressBar scanningProgress;
     private TextView statusBarText;
-    private TextView thankYouText;
+    private View thankYouView;
     private Handler handler = new Handler();
 
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         statusBar = findViewById(R.id.status_bar);
         scanningProgress = findViewById(R.id.scanning_progress);
         statusBarText = findViewById(R.id.status_bar_text);
-        thankYouText = findViewById(R.id.thank_you_text);
+        thankYouView = findViewById(R.id.thank_you_view);
         multipleMatchesScrollBar = findViewById(R.id.multiple_matches_scroll_bar);
 
         scanButton.setRecordButtonListener(new RecordButton.RecordButtonListener() {
@@ -59,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 appPhase = AppPhase.SCANNING;
                 updateView();
                 handler.postDelayed(new SwitchStateRunnable(), 5000);
+            }
+        });
+
+        findViewById(R.id.continue_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                appPhase = AppPhase.START;
+                updateView();
             }
         });
 
@@ -92,29 +100,30 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setVisibility(View.GONE);
                 scanButton.setVisibility(View.VISIBLE);
                 multipleMatchesScrollBar.setVisibility(View.GONE);
-                thankYouText.setVisibility(View.GONE);
+                thankYouView.setVisibility(View.GONE);
                 break;
             case SCANNING:
+                scanningProgress.setVisibility(View.VISIBLE);
                 scanButton.displayVideoRecordStateReady();
                 scanButton.setVisibility(View.VISIBLE);
                 statusBar.setVisibility(View.VISIBLE);
                 multipleMatchesScrollBar.setVisibility(View.GONE);
                 statusBarText.setText("Scanning...");
-                thankYouText.setVisibility(View.GONE);
+                thankYouView.setVisibility(View.GONE);
                 break;
             case MULTIPLE_MATCHES:
                 scanningProgress.setVisibility(View.GONE);
                 scanButton.setVisibility(View.GONE);
                 multipleMatchesScrollBar.setVisibility(View.VISIBLE);
                 statusBarText.setText("Multiple Matches");
-                thankYouText.setVisibility(View.GONE);
+                thankYouView.setVisibility(View.GONE);
                 break;
             case THANK_YOU:
                 scanningProgress.setVisibility(View.GONE);
                 scanButton.setVisibility(View.GONE);
                 multipleMatchesScrollBar.setVisibility(View.GONE);
                 statusBar.setVisibility(View.GONE);
-                thankYouText.setVisibility(View.VISIBLE);
+                thankYouView.setVisibility(View.VISIBLE);
                 break;
         }
     }
