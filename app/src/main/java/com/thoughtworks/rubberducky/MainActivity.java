@@ -68,15 +68,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PossibleMatches.class);
-                startActivity(intent);
-                appPhase = AppPhase.THANK_YOU;
+                startActivityForResult(intent, 0);
             }
         });
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data.getBooleanExtra("going_back", false)) {
+            if (data.getBooleanExtra("result", false)) {
+                appPhase = AppPhase.THANK_YOU;
+            } else {
+                appPhase = AppPhase.MULTIPLE_MATCHES;
+            }
+        }
         updateView();
     }
 

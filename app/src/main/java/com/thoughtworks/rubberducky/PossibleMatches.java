@@ -68,7 +68,8 @@ public class PossibleMatches extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("result", "yes ship");
+                returnIntent.putExtra("result", true);
+                returnIntent.putExtra("going_back", true);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -80,7 +81,8 @@ public class PossibleMatches extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("result", "no ship");
+                returnIntent.putExtra("result", false);
+                returnIntent.putExtra("going_back", true);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
