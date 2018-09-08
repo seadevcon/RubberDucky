@@ -72,49 +72,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ship1" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ship2" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ship3" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ship4" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ship5" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
         </LinearLayout>
     </HorizontalScrollView>
 
