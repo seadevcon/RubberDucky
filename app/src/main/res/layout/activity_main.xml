@@ -11,15 +11,45 @@
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </RelativeLayout>
+        android:orientation="vertical"></RelativeLayout>
 
     <com.github.florent37.camerafragment.widgets.RecordButton
+        android:id="@+id/scan_button"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/status_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/layout_statusbar"
+        android:padding="10dp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/status_bar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Scanning..."
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/status_bar_text" />
+    </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

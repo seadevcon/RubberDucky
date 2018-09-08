@@ -7,14 +7,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 
 import com.github.florent37.camerafragment.CameraFragment;
 import com.github.florent37.camerafragment.configuration.Configuration;
+import com.github.florent37.camerafragment.widgets.RecordButton;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
-    Button btn;
+
+    private boolean isScanning = false;
+    private RecordButton scanButton;
+    private View statusBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,28 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             openCamera();
+        }
+
+        scanButton = findViewById(R.id.scan_button);
+        statusBar = findViewById(R.id.status_bar);
+
+
+        scanButton.setRecordButtonListener(new RecordButton.RecordButtonListener() {
+            @Override
+            public void onRecordButtonClicked() {
+                isScanning = !isScanning;
+                updateView();
+            }
+        });
+    }
+
+    private void updateView() {
+        if (isScanning) {
+            scanButton.displayVideoRecordStateReady();
+            statusBar.setVisibility(View.VISIBLE);
+        } else {
+            scanButton.displayPhotoState();
+            statusBar.setVisibility(View.GONE);
         }
     }
 
