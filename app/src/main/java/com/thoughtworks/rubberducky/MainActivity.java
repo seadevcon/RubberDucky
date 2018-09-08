@@ -2,31 +2,29 @@ package com.thoughtworks.rubberducky;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.florent37.camerafragment.CameraFragment;
 import com.github.florent37.camerafragment.configuration.Configuration;
 import com.github.florent37.camerafragment.widgets.RecordButton;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
 
-    private boolean isScanning = false;
+    private AppPhase appPhase = AppPhase.START;
     private RecordButton scanButton;
     private View statusBar;
+    private ProgressBar scanningProgress;
+    private TextView statusBarText;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +43,38 @@ public class MainActivity extends AppCompatActivity {
 
         scanButton = findViewById(R.id.scan_button);
         statusBar = findViewById(R.id.status_bar);
-
+        scanningProgress = findViewById(R.id.scanning_progress);
+        statusBarText = findViewById(R.id.status_bar_text);
 
         scanButton.setRecordButtonListener(new RecordButton.RecordButtonListener() {
             @Override
             public void onRecordButtonClicked() {
-                isScanning = !isScanning;
+                appPhase = AppPhase.SCANNING;
                 updateView();
+                handler.postDelayed(new SwitchStateRunnable(), 5000);
             }
         });
     }
 
     private void updateView() {
-        if (isScanning) {
-            scanButton.displayVideoRecordStateReady();
-            statusBar.setVisibility(View.VISIBLE);
-            //NEW STUFF DELETE
-            Intent intent = new Intent(this, PossibleMatches.class);
-            startActivity(intent);
-        } else {
-            scanButton.displayPhotoState();
-            statusBar.setVisibility(View.GONE);
+        switch (appPhase) {
+            case START:
+                scanButton.displayPhotoState();
+                statusBar.setVisibility(View.GONE);
+                scanButton.setVisibility(View.VISIBLE);
+                break;
+            case SCANNING:
+                scanButton.displayVideoRecordStateReady();
+                scanButton.setVisibility(View.VISIBLE);
+                statusBar.setVisibility(View.VISIBLE);
+                statusBarText.setText("Scanning...");
+                break;
+            case MULTIPLE_MATCHES:
+                scanningProgress.setVisibility(View.GONE);
+                scanButton.setVisibility(View.GONE);
+                statusBarText.setText("Multiple Matches");
+                break;
+
         }
     }
 
@@ -84,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    // when cam permission either yes or no
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -106,5 +114,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private class SwitchStateRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            appPhase = AppPhase.MULTIPLE_MATCHES;
+            updateView();
+        }
+    }
 
 }
