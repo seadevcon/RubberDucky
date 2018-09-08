@@ -3,5 +3,7 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="thankyoutext">Thank you for supporting Global Fishing Watch by submitting..</string>
+    <string name="thankyoutext">Thank you for supporting Global Fishing Watch and Sea Shepherd by
+    submitting pictures and location data of possibly risky fishing vessels.
+    </string>
 </resources>
