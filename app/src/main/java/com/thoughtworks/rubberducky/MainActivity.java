@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import com.github.florent37.camerafragment.widgets.RecordButton;
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
 
+    private static boolean firstRound = true;
+
     private AppPhase appPhase = AppPhase.START;
     private RecordButton scanButton;
     private View statusBar;
@@ -28,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView statusBarText;
     private View thankYouView;
     private Handler handler = new Handler();
-
+    private TextView thankYouText;
+    private Button continueButton;
+    private Button doneButton;
 
 
     @Override
@@ -52,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         statusBarText = findViewById(R.id.status_bar_text);
         thankYouView = findViewById(R.id.thank_you_view);
         multipleMatchesScrollBar = findViewById(R.id.multiple_matches_scroll_bar);
+        thankYouText = findViewById(R.id.thank_you_text);
+        continueButton = findViewById(R.id.continue_button);
+        doneButton = findViewById(R.id.done_button);
 
         scanButton.setRecordButtonListener(new RecordButton.RecordButtonListener() {
             @Override
@@ -62,9 +70,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.continue_button).setOnClickListener(new View.OnClickListener() {
+        continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                firstRound = false;
+                appPhase = AppPhase.START;
+                updateView();
+            }
+        });
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstRound = false;
                 appPhase = AppPhase.START;
                 updateView();
             }
@@ -118,6 +136,15 @@ public class MainActivity extends AppCompatActivity {
                 statusBarText.setText("Multiple Matches");
                 thankYouView.setVisibility(View.GONE);
                 break;
+            case NO_MATCHES:
+                statusBar.setVisibility(View.GONE);
+                scanButton.setVisibility(View.GONE);
+                multipleMatchesScrollBar.setVisibility(View.GONE);
+                thankYouView.setVisibility(View.VISIBLE);
+                thankYouText.setText("No matches found!\n\nDo you want to register a new boat?");
+                doneButton.setText("No, thanks.");
+                continueButton.setText("Yes!");
+                break;
             case THANK_YOU:
                 scanningProgress.setVisibility(View.GONE);
                 scanButton.setVisibility(View.GONE);
@@ -168,7 +195,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            appPhase = AppPhase.MULTIPLE_MATCHES;
+            if (firstRound) {
+                appPhase = AppPhase.MULTIPLE_MATCHES;
+            } else {
+                appPhase = AppPhase.NO_MATCHES;
+            }
             updateView();
         }
     }
