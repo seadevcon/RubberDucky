@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private AppPhase appPhase = AppPhase.START;
     private RecordButton scanButton;
     private View statusBar;
+    private View multipleMatchesScrollBar;
     private ProgressBar scanningProgress;
     private TextView statusBarText;
     private Handler handler = new Handler();
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         statusBar = findViewById(R.id.status_bar);
         scanningProgress = findViewById(R.id.scanning_progress);
         statusBarText = findViewById(R.id.status_bar_text);
+        multipleMatchesScrollBar = findViewById(R.id.multiple_matches_scroll_bar);
 
         scanButton.setRecordButtonListener(new RecordButton.RecordButtonListener() {
             @Override
@@ -62,16 +64,19 @@ public class MainActivity extends AppCompatActivity {
                 scanButton.displayPhotoState();
                 statusBar.setVisibility(View.GONE);
                 scanButton.setVisibility(View.VISIBLE);
+                multipleMatchesScrollBar.setVisibility(View.GONE);
                 break;
             case SCANNING:
                 scanButton.displayVideoRecordStateReady();
                 scanButton.setVisibility(View.VISIBLE);
                 statusBar.setVisibility(View.VISIBLE);
+                multipleMatchesScrollBar.setVisibility(View.GONE);
                 statusBarText.setText("Scanning...");
                 break;
             case MULTIPLE_MATCHES:
                 scanningProgress.setVisibility(View.GONE);
                 scanButton.setVisibility(View.GONE);
+                multipleMatchesScrollBar.setVisibility(View.VISIBLE);
                 statusBarText.setText("Multiple Matches");
                 break;
 
