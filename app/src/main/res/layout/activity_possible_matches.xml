@@ -7,55 +7,117 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:src="@drawable/my_image"
         android:id="@+id/ship_image"
         android:layout_width="423dp"
         android:layout_height="155dp"
-        app:srcCompat="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="-31dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/my_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/match"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="445dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/no_match"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="447dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+
+
+    <TableRow>
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/table_layout_4_save"
+            android:padding="3dip" />
+        <TextView
+            android:text="@string/table_layout_4_save_shortcut"
+            android:gravity="right"
+            android:padding="3dip" />
+    </TableRow>
     <TableLayout
+        android:id="@+id/ship_info"
         android:layout_width="368dp"
         android:layout_height="274dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="163dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ship_image">
 
         <TableRow
             android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Name"
+                android:padding="3dip" />
+            <TextView
+                android:text="Hermes"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
 
         <TableRow
             android:id="@+id/id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Name"
+                android:padding="3dip" />
+            <TextView
+                android:text="Hermes"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
 
         <TableRow
             android:id="@+id/size"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Ship Length"
+                android:padding="3dip" />
+            <TextView
+                android:text="300 meters"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
 
         <TableRow
             android:id="@+id/home_harbor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Home Harbor"
+                android:padding="3dip" />
+            <TextView
+                android:text="Olympus"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
 
     </TableLayout>
 </android.support.constraint.ConstraintLayout>
