@@ -18,7 +18,7 @@
 
     <Button
         android:id="@+id/match"
-        android:layout_width="88dp"
+        android:layout_width="128dp"
         android:layout_height="48dp"
         android:layout_marginBottom="18dp"
         android:layout_marginLeft="16dp"
@@ -29,7 +29,7 @@
 
     <Button
         android:id="@+id/no_match"
-        android:layout_width="88dp"
+        android:layout_width="125dp"
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
@@ -43,9 +43,14 @@
         android:id="@+id/ship_info"
         android:layout_width="368dp"
         android:layout_height="274dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/match"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ship_image">
 
@@ -55,26 +60,30 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:padding="3dip"
                 android:text="Name"
-                android:padding="3dip" />
+                app:autoSizeMinTextSize="20px" />
+
             <TextView
-                android:text="Hermes"
+                android:layout_width="161dp"
                 android:gravity="right"
-                android:padding="3dip" />
+                android:padding="3dip"
+                android:text="Hermes" />
         </TableRow>
 
         <TableRow
             android:id="@+id/id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:text="ID"
-                android:padding="3dip" />
+                android:padding="3dip"
+                android:text="ID" />
+
             <TextView
-                android:text="GBT-1005"
                 android:gravity="right"
-                android:padding="3dip" />
+                android:padding="3dip"
+                android:text="GBT-1005" />
         </TableRow>
 
         <TableRow
@@ -83,26 +92,30 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="Ship Length"
-                android:padding="3dip" />
+                android:layout_width="202dp"
+                android:padding="3dip"
+                android:text="Ship Length" />
+
             <TextView
-                android:text="300 meters"
+                android:layout_width="167dp"
                 android:gravity="right"
-                android:padding="3dip" />
+                android:padding="3dip"
+                android:text="300 meters" />
         </TableRow>
 
         <TableRow
             android:id="@+id/home_harbor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="164dp">
 
             <TextView
-                android:text="Home Harbor"
-                android:padding="3dip" />
+                android:padding="3dip"
+                android:text="Home Harbor" />
+
             <TextView
-                android:text="Olympus"
                 android:gravity="right"
-                android:padding="3dip" />
+                android:padding="3dip"
+                android:text="Olympus" />
         </TableRow>
 
     </TableLayout>
