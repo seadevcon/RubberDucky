@@ -51,5 +51,4 @@
             android:layout_toRightOf="@id/status_bar_text" />
     </RelativeLayout>
 
-
 </android.support.constraint.ConstraintLayout>

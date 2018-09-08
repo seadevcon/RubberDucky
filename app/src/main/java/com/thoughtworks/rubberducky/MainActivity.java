@@ -2,17 +2,24 @@ package com.thoughtworks.rubberducky;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.github.florent37.camerafragment.CameraFragment;
 import com.github.florent37.camerafragment.configuration.Configuration;
 import com.github.florent37.camerafragment.widgets.RecordButton;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
@@ -53,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         if (isScanning) {
             scanButton.displayVideoRecordStateReady();
             statusBar.setVisibility(View.VISIBLE);
+            //NEW STUFF DELETE
+            Intent intent = new Intent(this, PossibleMatches.class);
+            startActivity(intent);
         } else {
             scanButton.displayPhotoState();
             statusBar.setVisibility(View.GONE);
@@ -74,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // when cam permission either yes or no
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -94,5 +105,6 @@ public class MainActivity extends AppCompatActivity {
             // permissions this app might request.
         }
     }
+
 
 }
