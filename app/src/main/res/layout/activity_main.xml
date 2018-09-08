@@ -11,7 +11,7 @@
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"></RelativeLayout>
+        android:orientation="vertical" />
 
     <com.github.florent37.camerafragment.widgets.RecordButton
         android:id="@+id/scan_button"
@@ -51,6 +51,20 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/status_bar_text" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/thank_you_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:background="@drawable/layout_statusbar"
+        android:layout_margin="40dp"
+        android:text="@string/thankyoutext"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <HorizontalScrollView
         android:id="@+id/multiple_matches_scroll_bar"

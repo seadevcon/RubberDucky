@@ -4,12 +4,11 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private View multipleMatchesScrollBar;
     private ProgressBar scanningProgress;
     private TextView statusBarText;
+    private TextView thankYouText;
     private Handler handler = new Handler();
 
     @Override
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         statusBar = findViewById(R.id.status_bar);
         scanningProgress = findViewById(R.id.scanning_progress);
         statusBarText = findViewById(R.id.status_bar_text);
+        thankYouText = findViewById(R.id.thank_you_text);
         multipleMatchesScrollBar = findViewById(R.id.multiple_matches_scroll_bar);
 
         scanButton.setRecordButtonListener(new RecordButton.RecordButtonListener() {
@@ -66,8 +67,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PossibleMatches.class);
                 startActivity(intent);
+                appPhase = AppPhase.THANK_YOU;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateView();
     }
 
     private void updateView() {
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setVisibility(View.GONE);
                 scanButton.setVisibility(View.VISIBLE);
                 multipleMatchesScrollBar.setVisibility(View.GONE);
+                thankYouText.setVisibility(View.GONE);
                 break;
             case SCANNING:
                 scanButton.displayVideoRecordStateReady();
@@ -84,14 +93,22 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setVisibility(View.VISIBLE);
                 multipleMatchesScrollBar.setVisibility(View.GONE);
                 statusBarText.setText("Scanning...");
+                thankYouText.setVisibility(View.GONE);
                 break;
             case MULTIPLE_MATCHES:
                 scanningProgress.setVisibility(View.GONE);
                 scanButton.setVisibility(View.GONE);
                 multipleMatchesScrollBar.setVisibility(View.VISIBLE);
                 statusBarText.setText("Multiple Matches");
+                thankYouText.setVisibility(View.GONE);
                 break;
-
+            case THANK_YOU:
+                scanningProgress.setVisibility(View.GONE);
+                scanButton.setVisibility(View.GONE);
+                multipleMatchesScrollBar.setVisibility(View.GONE);
+                statusBar.setVisibility(View.GONE);
+                thankYouText.setVisibility(View.VISIBLE);
+                break;
         }
     }
 
